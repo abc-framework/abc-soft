@@ -16,7 +16,11 @@
     "autoload": {
         "psr-4": {
             "DIC\\": "DIC/src/",
-            "DIC\\Tests\\": "DIC/tests/"
+            "DIC\\Tests\\": "DIC/tests/",
+            "HTTP\\": "HTTP/src/",
+            "HTTP\\Tests\\": "HTTP/tests/",
+            "SQL\\": "SQL/src/",
+            "SQL\\Tests\\": "SQL/tests/"
         }
     }
 } 
