@@ -1,0 +1,22 @@
+{
+    "name": "nikolay-twin/abc-soft",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolay Cherpinskiy",
+            "email": "abc-framework@mail.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0",
+        "psr/container": "1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DIC\\": "DIC/src/",
+            "DIC\\Tests\\": "DIC/tests/"
+        }
+    }
+} 
