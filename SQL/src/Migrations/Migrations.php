@@ -4,17 +4,7 @@ namespace Abcsoft\SQL\Migrations;
 
 
 use Abcsoft\SQL\DbCommand\DbCommand; 
-if(!function_exists('dbg')){
-    function dbg($var){
-echo "\n\n";
-    var_dump($var);
-echo "\n";
-$bactrace = debug_backtrace()[0];
-    echo  $bactrace['file'] .': '. $bactrace['line'];
-    
-    exit("\n\n");
-    }    
-}  
+
 /** 
  * Миграции
  * 

@@ -5,17 +5,7 @@ namespace Abcsoft\SQL\Pdo;
 
 use Abcsoft\SQL\Interfaces\PdoInterface;
 use Abcsoft\SQL\SqlDebug\SqlDebug;    
-if(!function_exists('dbg')){
-    function dbg($var){
-echo "\n\n";
-    var_dump($var);
-echo "\n";
-$bactrace = debug_backtrace()[0];
-    echo  $bactrace['file'] .': '. $bactrace['line'];
-    
-    exit("\n\n");
-    }    
-}
+
 /** 
  * Класс Pdo
  * 
