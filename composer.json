@@ -19,7 +19,10 @@
             "HTTP\\": "HTTP/src/",
             "HTTP\\Tests\\": "HTTP/tests/",
             "SQL\\": "SQL/src/",
-            "SQL\\Tests\\": "SQL/tests/"
+            "SQL\\Tests\\": "SQL/tests/",
+            "TPL\\": "TPL/src/Template",
+            "TPLNative\\": "TPL/src/TplNative",
+            "TPL\\Tests\\": "TPL/tests/"
         }
     }
 } 

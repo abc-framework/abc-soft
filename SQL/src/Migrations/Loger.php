@@ -70,9 +70,9 @@ class Loger
                 ], 
                 $insert)
             ->execute();
-            $this->command->reset();
-            
-            $progressBar->end("It's okay.". PHP_EOL ."Все отлично.");
+        $this->command->reset();
+        
+        $progressBar->end("It's okay.". PHP_EOL ."Все отлично.");
     } 
     
     /**
