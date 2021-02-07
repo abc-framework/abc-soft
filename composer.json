@@ -1,5 +1,5 @@
 {
-    "name": "nikolay-twin/abc-soft",
+    "name": "abc-framework/abc-soft", 
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -8,7 +8,6 @@
             "email": "abc-framework@mail.ru"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.0",
         "psr/container": "1.0.0"
