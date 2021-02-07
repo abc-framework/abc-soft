@@ -279,12 +279,12 @@ class Processor
         $parentOut = $this->tplPhp ? '<?=$'. $blockParent .'; ?>'
                                    : $this->leftDelim .'$'. $blockParent . $this->rightDelim;
      
-        $this->tpl = preg_replace('~<!--//\s+('
-                                  . preg_quote($blockParent, '~')
-                                  .')\s*#*.*?\s+\-\->.*?\\1\s+?end\s*#*[^>]*?\s+?\-\->~uis',
-                                   $parentOut,
-                                   $this->tpl
-                                   );
+        $this->tpl = preg_replace(
+            '~<!--//\s+('. preg_quote($blockParent, '~')
+            .')\s*#*.*?\s+\-\->.*?\\1\s+?end\s*#*[^>]*?\s+?\-\->~uis',
+            $parentOut,
+            $this->tpl
+            );
      
         if (false === strpos($this->tpl, $parentOut)) {
             throw new \DomainException(sprintf('AbcTemplate: '. ABC_TPL_INVALID_BLOCK, $blockParent, $blockParent)); 
@@ -340,10 +340,11 @@ class Processor
             foreach ($this->parsed as $name => $cont) {
              
                 foreach ($tags as $tag) {
-                    $this->parsed[$name] = str_replace($tag,
-                                            $this->parsed[$tag],
-                                            $this->parsed[$name]
-                                            );
+                    $this->parsed[$name] = str_replace(
+                        $tag,
+                        $this->parsed[$tag],
+                        $this->parsed[$name]
+                    );
                 }
             }
          
@@ -457,24 +458,29 @@ class Processor
         $names  = array_keys($this->data);
         $valyes = array_values($this->data);
     
-        $block  = preg_replace_callback('~'. preg_quote($this->leftDelim, '~')
-                                           .'include\s*?([a-z0-9\._]+?)'
-                                           . preg_quote($this->rightDelim, '~')
-                                           .'~uis',
-                                           [$this, 'pseudoIncludes'],
-                                           $block);
-                                           
-        $block  = preg_replace_callback('~'. preg_quote($this->leftDelim, '~')
-                                           .'(([^\$]+?)\s*\((.+?)\)+?)'
-                                           . preg_quote($this->rightDelim, '~')
-                                           .'~uis',
-                                           [$this, 'parseFunct'],
-                                           $block);
+        $block = preg_replace_callback(
+            '~'. preg_quote($this->leftDelim, '~')
+                .'include\s*?([a-z0-9\._]+?)'
+                . preg_quote($this->rightDelim, '~')
+                .'~uis',
+            [$this, 'pseudoIncludes'],
+            $block
+        );
       
-        $tags   = preg_replace('~([a-z0-9\._]+)~uis',
-                              $this->leftDelim .'$$1'. $this->rightDelim,
-                              $names
-                              );
+        $block = preg_replace_callback(
+            '~'. preg_quote($this->leftDelim, '~')
+                .'(([^\$]+?)\s*\((.+?)\)+?)'
+                . preg_quote($this->rightDelim, '~')
+                .'~uis',
+            [$this, 'parseFunct'],
+            $block
+        );
+      
+        $tags = preg_replace(
+            '~([a-z0-9\._]+)~uis',
+            $this->leftDelim .'$$1'. $this->rightDelim,
+            $names
+        );
      
         $block = str_replace($tags, $valyes, $block);
         return  preg_replace('~<\?[^x].*?\?>~uis', '', $block);
@@ -553,10 +559,11 @@ class Processor
             }
         }
      
-        $this->tpl = preg_replace('~(<!--//\s+[^#]+)#*[^>]*?(\s+-->)~ui',
-                                   '$1$2',
-                                   $this->tpl
-                                   );
+        $this->tpl = preg_replace(
+            '~(<!--//\s+[^#]+)#*[^>]*?(\s+-->)~ui',
+            '$1$2',
+            $this->tpl
+        );
      
         preg_match_all('~<!--//\s+([^\s]+?)\s+-->~uis', $this->tpl, $blocks);
         $this->prepare($blocks[1]);
@@ -573,18 +580,20 @@ class Processor
     {
         if (is_array($blocks)) {
             foreach ($blocks as $blockName) {
-                preg_match('~<!--//\s+'. preg_quote($blockName, '~')
-                          .'\s+-->{1}(.*?)<!--//\s+?'. preg_quote($blockName, '~')
-                          .'\s+end\s+-->~uis',
-                           $this->tpl,
-                           $blocksArray
-                         );
+                preg_match(
+                    '~<!--//\s+'. preg_quote($blockName, '~')
+                        .'\s+-->{1}(.*?)<!--//\s+?'. preg_quote($blockName, '~')
+                        .'\s+end\s+-->~uis',
+                    $this->tpl,
+                    $blocksArray
+                );
              
                 if (!empty($blocksArray[1])) {
-                    preg_match_all('~<!--//\s+([^\s]+?)\s+-->~uis',
-                                   $blocksArray[1],
-                                   $blocksRecursion
-                                   );
+                    preg_match_all(
+                        '~<!--//\s+([^\s]+?)\s+-->~uis',
+                        $blocksArray[1],
+                        $blocksRecursion
+                    );
                  
                     if (!empty($blocksRecursion[1])) { 
                         foreach ($blocksRecursion[1] as $blocks) {
@@ -608,10 +617,11 @@ class Processor
     */
     protected function replace($tpl)
     {
-        $a = preg_replace('~<!--//\s+([^\s]+?)\s+-->\n*.*?\s+\\1\s+end\s*-->~uis',
-                            $this->startDelim .'$1'. $this->endDelim,
-                            $tpl
-                            );
+        $a = preg_replace(
+            '~<!--//\s+([^\s]+?)\s+-->\n*.*?\s+\\1\s+end\s*-->~uis',
+            $this->startDelim .'$1'. $this->endDelim,
+            $tpl
+        );
             
         return $a;
     }
@@ -625,13 +635,12 @@ class Processor
     */
     protected function clear($tpl)
     {
-        return preg_replace('~'. preg_quote($this->startDelim, '~')
-                               .'.*?'
-                               . preg_quote($this->endDelim, '~')
-                               .'~uis',
-                            '',
-                            $tpl
-                            );
+        return preg_replace(
+            '~'. preg_quote($this->startDelim, '~')
+                .'.*?'. preg_quote($this->endDelim, '~').'~uis',
+            '',
+            $tpl
+        );
     }
 
     /**
